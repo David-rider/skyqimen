@@ -18,6 +18,7 @@ import HistoryModal from './components/HistoryModal';
 
 import { generateQiMenChartPro, evaluateQiMenChartPro, getUserPersonalForecastPro } from './utils/qimen';
 import { askCelestialMentor } from './utils/gemini';
+import { API_BASE_URL } from './utils/apiConfig';
 
 const INITIAL_USER_INFO = {
   name: '张有缘',
@@ -77,7 +78,7 @@ export default function App() {
     // 1. Verify user JWT token silently from backend database
     const token = localStorage.getItem('qimen_auth_token');
     if (token) {
-      fetch('http://localhost:5000/api/auth/profile', {
+      fetch(`${API_BASE_URL}/api/auth/profile`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       .then(res => {
@@ -120,7 +121,7 @@ export default function App() {
     const token = localStorage.getItem('qimen_auth_token');
     if (!token) return;
     try {
-      const response = await fetch('http://localhost:5000/api/divination/history', {
+      const response = await fetch(`${API_BASE_URL}/api/divination/history`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (response.ok) {
@@ -137,7 +138,7 @@ export default function App() {
     if (!token) return;
     if (!window.confirm(i18n.language === 'en' ? 'Are you sure you want to delete this record?' : '确定要删除这条预测记录吗？')) return;
     try {
-      const response = await fetch(`http://localhost:5000/api/divination/history/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/divination/history/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -300,7 +301,7 @@ export default function App() {
     // 4. Save history to database if logged in
     const token = localStorage.getItem('qimen_auth_token');
     if (token) {
-      fetch('http://localhost:5000/api/divination/save-history', {
+      fetch(`${API_BASE_URL}/api/divination/save-history`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -369,7 +370,7 @@ export default function App() {
         if (currentUser) {
           try {
             const token = localStorage.getItem('qimen_auth_token');
-            const res = await fetch('http://localhost:5000/api/divination/use-query', {
+            const res = await fetch(`${API_BASE_URL}/api/divination/use-query`, {
               method: 'POST',
               headers: { 'Authorization': `Bearer ${token}` }
             });

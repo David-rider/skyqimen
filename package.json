@@ -8,12 +8,18 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "build:android": "vite build && npx cap sync android"
+    "build:android": "vite build && npx cap sync android",
+    "dev:cf": "wrangler pages dev --compatibility-flag=nodejs_compat --d1 DB",
+    "db:local": "wrangler d1 execute skyqimen-db --local --file=schema.sql",
+    "db:deploy": "wrangler d1 execute skyqimen-db --remote --file=schema.sql"
   },
   "dependencies": {
     "@capacitor/android": "^8.3.4",
     "@capacitor/core": "^8.3.4",
+    "bcryptjs": "^3.0.3",
+    "hono": "^4.12.23",
     "i18next": "^26.3.0",
+    "jsonwebtoken": "^9.0.3",
     "lucide-react": "^1.17.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
@@ -29,6 +35,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
-    "vite": "^8.0.12"
+    "vite": "^8.0.12",
+    "wrangler": "^4.95.0"
   }
 }

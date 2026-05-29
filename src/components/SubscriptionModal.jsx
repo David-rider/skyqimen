@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X, Check, CreditCard, Sparkles, Smartphone, Landmark } from 'lucide-react';
+import { API_BASE_URL } from '../utils/apiConfig';
 
 export default function SubscriptionModal({ isOpen, onClose, onUpgradeSuccess, currentUser, onOpenAuth }) {
   const { t, i18n } = useTranslation();
@@ -23,7 +24,7 @@ export default function SubscriptionModal({ isOpen, onClose, onUpgradeSuccess, c
     setIsProcessing(true);
     try {
       const amount = plan === 'pro' ? 68 : 198;
-      const response = await fetch('http://localhost:5000/api/payment/create-order', {
+      const response = await fetch(`${API_BASE_URL}/api/payment/create-order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +55,7 @@ export default function SubscriptionModal({ isOpen, onClose, onUpgradeSuccess, c
   const handleSimulatePayment = async () => {
     setIsProcessing(true);
     try {
-      const response = await fetch('http://localhost:5000/api/payment/confirm-order', {
+      const response = await fetch(`${API_BASE_URL}/api/payment/confirm-order`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

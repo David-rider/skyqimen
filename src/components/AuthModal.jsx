@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X, User, Mail, Lock, Sparkles } from 'lucide-react';
 
-const API_BASE_URL = 'http://localhost:5000';
+import { API_BASE_URL } from '../utils/apiConfig';
 
 export default function AuthModal({ isOpen, onClose, onSuccess }) {
   const { t } = useTranslation();
