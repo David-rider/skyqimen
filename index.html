@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" fill="#d4af37" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#06050b" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>奇门遁甲 AI 乾坤预测 | 您的专属时空决策顾问</title>
+    <meta name="description" content="结合中国传统易经时家奇门遁甲排盘技术与最新大语言模型 AI 智能，为用户提供每日、每周、每月全方位的运势详析、时辰吉凶表以及吉祥方位规划。免费体验基础功能，订阅解锁深度商业策略决策指导。" />
+    <meta name="keywords" content="奇门遁甲, 易经占卜, AI预测, 每日运势, 商业决策, 吉祥方位, 算命排盘" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('Service Worker registered successfully:', reg.scope))
+            .catch(err => console.log('Service Worker registration failed:', err));
+        });
+      }
+    </script>
+  </body>
+</html>
+

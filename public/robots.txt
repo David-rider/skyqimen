@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /?*apiKey=
+Disallow: /?*key=
+
+Sitemap: https://qimen.ai/sitemap.xml
