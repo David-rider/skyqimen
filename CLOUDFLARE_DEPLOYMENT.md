@@ -39,23 +39,21 @@
 1. 回到 Cloudflare 控制台，点击 **Workers & Pages** -> **Create Application**。
 2. 选择 **Pages** 选项卡，然后点击 **Connect to Git**。
 3. 授权并选择您的 GitHub 仓库 `David-rider/skyqimen`。
-4. 配置构建信息（Build settings）：
-   - **Framework preset**: 选择 **Vite** （系统会自动填充 Build command 为 `npm run build`，Build output directory 为 `dist`）。
-5. 点击 **Save and Deploy**（注：首次部署可能由于未配置 D1 绑定而无法调通 API，这是正常现象，请继续下一步）。
+4. **确认构建配置 (Build settings)**：由于项目含有 `wrangler.json`，控制台可能会预填并跳过本步。您可以直接点击 **Save and Deploy**。
+   *   *提示*：若后续构建失败或需要确认，请在部署完成后访问 **Settings** -> **Build & deployments** -> **Build configuration**，确保 **Build command** 为 `npm run build`，**Build output directory** (或 Path) 设为 `dist`。
 
 ### 第四步：绑定 D1 数据库与配置 Node.js 兼容标志
-为了让后端 Pages Functions 能访问 D1 数据库并正常运行加密模块，需要绑定变量和配置环境：
-1. 在 Pages 项目的管理页面中，点击顶部的 **Settings** 选项卡。
-2. **配置 Node 运行兼容性**：
-   - 点击左侧的 **Functions**。
-   - 滚动到 **Compatibility Flags** (兼容性标志) 区域。
-   - 在 **Production** 和 **Preview** 两个环境中，分别填入：`nodejs_compat`。
-3. **绑定 D1 数据库**：
-   - 继续在 **Functions** 页面下滚动，找到 **D1 Database Bindings** 区域。
+为了让后端 Pages Functions 能访问 D1 数据库并正常运行加密模块，需要在设置页绑定变量和配置兼容标志：
+1. 进入 Pages 项目的管理页面，点击顶部的 **Settings** 选项卡。
+2. 点击左侧菜单第一项：**Build & deployments (构建与部署)**。
+3. 滚动右侧页面，找到 **Compatibility flags (兼容性标志)** 区域：
+   - 在 **Production (生产环境)** 和 **Preview (预览环境)** 中分别添加或选择兼容标志：`nodejs_compat`。
+4. 继续向下滚动到 **Bindings (绑定)** 或 **Functions (函数)** 区域中的 **D1 database bindings (D1 数据库绑定)**：
    - 点击 **Add binding**。
    - **Variable name (变量绑定名)**：必须填入 `DB`（大写，与代码严格对应）。
    - **D1 Database**：选择您第一步创建的 `skyqimen-db`。
    - 点击 **Save** 保存。
+
 
 ### 第五步：重新触发部署
 1. 数据库绑定和兼容标志保存后，点击 Pages 项目顶部的 **Deployments**。
